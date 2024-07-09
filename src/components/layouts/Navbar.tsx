@@ -32,10 +32,10 @@ const Navbar = () => {
     },
   ];
   return (
-    <div className="h-[50px] flex justify-between px-[60px] py-2">
-      <div className="flex gap-x-2 items-baseline">
-        <img src="FT.png" alt="" className="h-[30px]" />
-        <p className="text-xl font-bold">
+    <div className="h-[60px] flex justify-between px-[60px] py-2">
+      <div className="flex gap-x-2 items-center">
+        <img src="FT.png" alt="" className="h-[42px]" />
+        <p className="text-3xl font-bold">
           <span className="text-secondaryColor">Fitness</span>{" "}
           <span className="text-primaryColor">Tools</span>
         </p>
