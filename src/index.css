@@ -70,3 +70,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+.section-gap {
+  @apply px-[60px] my-[60px];
+}
+
+.details-btn {
+  @apply bg-transparent text-secondaryColor border-2 border-primaryColor hover:text-white hover:bg-secondaryColor hover:border-secondaryColor;
+}
