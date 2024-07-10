@@ -20,6 +20,13 @@ module.exports = {
       colors: {
         primaryColor: "#FFB400",
         secondaryColor: "#437358",
+        primaryColor200: "#ffc45e",
+        primaryColor300: "#ffbc40",
+        primaryColor500: "#de9c00",
+        primaryColor600: "#be8500",
+        secondaryColor300: "#558067",
+        secondaryColor500: "#2f543f",
+        secondaryColor600: "#2f543f",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -24,14 +24,14 @@ const Categories = () => {
         {categories.map((category, index) => (
           <div
             key={index}
-            className="group flex flex-col gap-y-3 items-center justify-center bg-secondaryColor hover:bg-[#2f543f] rounded-md p-5 cursor-pointer transition duration-300 delay-75"
+            className="group flex flex-col gap-y-3 items-center justify-center bg-secondaryColor hover:bg-secondaryColor600 rounded-md p-5 cursor-pointer transition duration-300 delay-75"
           >
             <img
               src={category.image}
               alt={category.label}
               className="w-[250px]"
             />
-            <p className="text-xl font-bold text-white group-hover:text-primaryColor transition duration-300 delay-75">
+            <p className="text-xl font-bold text-white group-hover:text-primaryColor200 transition duration-300 delay-75">
               {category.label}
             </p>
           </div>
