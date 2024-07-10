@@ -1,3 +1,4 @@
+import Benefit from "./components/Benefit";
 import Categories from "./components/Categories";
 import FeaturedProduct from "./components/FeaturedProduct";
 import Hero from "./components/Hero";
@@ -8,6 +9,7 @@ const Home = () => {
       <Hero />
       <Categories />
       <FeaturedProduct />
+      <Benefit />
     </div>
   );
 };
