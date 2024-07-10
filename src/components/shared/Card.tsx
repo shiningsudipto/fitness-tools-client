@@ -1,6 +1,6 @@
 import { TProduct } from "@/types";
-import { Button } from "../ui/button";
 import { FaDollarSign } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 interface CardProps {
   product: TProduct[];
@@ -23,9 +23,14 @@ const Card: React.FC<CardProps> = ({ product }) => {
             <p className="font-semibold flex items-center">
               Price: {singleProduct?.price} <FaDollarSign />
             </p>
-            <Button className="bg-transparent text-secondaryColor border-2 border-primaryColor hover:text-white hover:bg-secondaryColor hover:border-secondaryColor">
-              View Details
-            </Button>
+            <div className="pt-2">
+              <Link
+                to={`product-details/${singleProduct?._id}`}
+                className="bg-transparent text-secondaryColor border-2 border-primaryColor hover:text-white hover:bg-secondaryColor hover:border-secondaryColor py-1 px-3 rounded font-medium"
+              >
+                View Details
+              </Link>
+            </div>
           </div>
         );
       })}

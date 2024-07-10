@@ -1,4 +1,5 @@
 import About from "@/pages/about/About";
+import Details from "@/pages/details/Details";
 import Home from "@/pages/home/Home";
 
 export const pageRoutes = [
@@ -15,8 +16,8 @@ export const pageRoutes = [
         element: <Home />,
       },
       {
-        path: "product-details",
-        element: <Home />,
+        path: "product-details/:id",
+        element: <Details />,
       },
       {
         path: "cart",
