@@ -4,7 +4,6 @@ import img2 from "../../../assets/images/Benefits2.webp";
 const Benefit = () => {
   return (
     <div className="section-gap">
-      <p>Hello, Benefit!</p>
       <div className="grid grid-cols-2 gap-5">
         <div className="relative">
           <img
@@ -19,7 +18,7 @@ const Benefit = () => {
           />
         </div>
         <div>
-          <p className="text-4xl font-bold mb-3">Benefit!</p>
+          <p className="text-4xl font-bold mb-3 text-primaryColor">Benefit!</p>
           <p className="mb-5 text-xl font-semibold">
             Benefits of Fitness Products from Fitness Tolls!
           </p>

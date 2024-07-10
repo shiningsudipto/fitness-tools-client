@@ -10,11 +10,12 @@ import img9 from "../../../assets/images/h9.webp";
 import img10 from "../../../assets/images/h10.webp";
 import img11 from "../../../assets/images/h12.jpg";
 import img13 from "../../../assets/images/h15.jpg";
+import SectionTitle from "@/components/shared/SectionTitle";
 
 const Gallery = () => {
   return (
     <div>
-      <p>Hello, Gallery!</p>
+      <SectionTitle title="gallery" subTitle="our healthy customers" />
       <div className="photo-gallery">
         <div className="column">
           <div className="photo">

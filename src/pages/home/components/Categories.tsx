@@ -1,3 +1,4 @@
+import SectionTitle from "@/components/shared/SectionTitle";
 import cImg1 from "../../../assets/images/category/Dumbbells.webp";
 import cImg2 from "../../../assets/images/category/Exercise-Bikes.png";
 import cImg3 from "../../../assets/images/category/Kettlebells.png";
@@ -19,7 +20,7 @@ const categories = [
 const Categories = () => {
   return (
     <div className="px-[60px] my-5">
-      <p>Hello, Categories!</p>
+      <SectionTitle title="categories" subTitle="tools we provides" />
       <div className="grid grid-cols-3 gap-5">
         {categories.map((category, index) => (
           <div
