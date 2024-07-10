@@ -1,7 +1,9 @@
 import Benefit from "./components/Benefit";
 import Categories from "./components/Categories";
 import FeaturedProduct from "./components/FeaturedProduct";
+import Gallery from "./components/Gallery";
 import Hero from "./components/Hero";
+import "./style.css";
 
 const Home = () => {
   return (
@@ -10,6 +12,7 @@ const Home = () => {
       <Categories />
       <FeaturedProduct />
       <Benefit />
+      <Gallery />
     </div>
   );
 };
