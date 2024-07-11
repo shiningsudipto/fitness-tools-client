@@ -2,6 +2,7 @@ import About from "@/pages/about/About";
 import Cart from "@/pages/cart/Cart";
 import Details from "@/pages/details/Details";
 import Home from "@/pages/home/Home";
+import ProductManagement from "@/pages/productManagement/ProductManagement";
 import Products from "@/pages/products/Products";
 
 export const pageRoutes = [
@@ -15,7 +16,7 @@ export const pageRoutes = [
       },
       {
         path: "product-management",
-        element: <Home />,
+        element: <ProductManagement />,
       },
       {
         path: "product-details/:id",
