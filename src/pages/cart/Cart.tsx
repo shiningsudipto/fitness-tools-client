@@ -28,7 +28,7 @@ const Cart = () => {
           {cart?.map((item, index) => {
             const id = item?.id;
             return (
-              <tr key={index} className="text-center">
+              <tr key={index} className="text-center border-b">
                 <td className="border border-gray-200 px-4 py-2">
                   {index + 1}
                 </td>
@@ -52,7 +52,7 @@ const Cart = () => {
                     onClick={() => dispatch(removeFromCart({ id }))}
                     className="p-2 "
                   >
-                    <FaRegTrashAlt className="text-lg text-primaryColor" />
+                    <FaRegTrashAlt className="text-lg text-red-600" />
                   </button>
                 </td>
               </tr>

@@ -7,8 +7,11 @@ import {
 } from "@/components/ui/drawer";
 import { IoMenu } from "react-icons/io5";
 import { AiOutlineCloseSquare } from "react-icons/ai";
+import { FaCartPlus } from "react-icons/fa";
+import { useAppSelector } from "@/redux/hooks";
 
 const Navbar = () => {
+  const cart = useAppSelector((state) => state.cart);
   const links = [
     {
       path: "/",
@@ -22,10 +25,10 @@ const Navbar = () => {
       path: "/product-management",
       name: "Product Management",
     },
-    {
-      path: "/cart",
-      name: "Cart",
-    },
+    // {
+    //   path: "/cart",
+    //   name: "Cart",
+    // },
     {
       path: "/about-us",
       name: "About",
@@ -46,6 +49,9 @@ const Navbar = () => {
             {menu?.name}
           </Link>
         ))}
+        <Link to="/cart" className="flex items-center text-primaryColor">
+          <FaCartPlus /> <span className="ms-1 -mt-2">{cart.length}</span>
+        </Link>
       </div>
       <div className="md:hidden block">
         <Drawer direction="right">
