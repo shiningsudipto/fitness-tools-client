@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 
 interface CardProps {
   product: TProduct[];
+  rowItem: number;
 }
 
-const Card: React.FC<CardProps> = ({ product }) => {
+const Card: React.FC<CardProps> = ({ product, rowItem }) => {
   return (
-    <div className="grid grid-cols-4 gap-5">
+    <div className={`grid grid-cols-${rowItem} gap-5`}>
       {product?.map((singleProduct) => {
         return (
           <div className="group space-y-2 " key={singleProduct?._id}>

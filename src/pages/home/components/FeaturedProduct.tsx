@@ -9,7 +9,7 @@ const FeaturedProduct = () => {
   return (
     <div className="section-gap">
       <SectionTitle title="Featured Products" subTitle="top selling products" />
-      <Card product={firstFourProducts} />
+      <Card product={firstFourProducts} rowItem={4} />
       <div className="mt-10 text-center">
         <Link
           to="/products"

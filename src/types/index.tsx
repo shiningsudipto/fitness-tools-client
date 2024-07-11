@@ -10,3 +10,10 @@ export interface TProduct {
   updatedAt: string;
   __v: number;
 }
+
+export interface ProductFilters {
+  searchTerm?: string;
+  categories?: string[];
+  sortByPrice?: "asc" | "desc";
+  price?: number;
+}
