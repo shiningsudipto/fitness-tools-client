@@ -11,6 +11,20 @@ const Cart = () => {
   const cart = useAppSelector((state) => state.cart);
   console.log(cart);
   const dispatch = useAppDispatch();
+  // Calculate total quantity and total price
+  const calculateTotals = () => {
+    let totalPrice = 0;
+    let totalQuantity = 0;
+
+    cart.forEach((item) => {
+      totalQuantity += item.quantity;
+      totalPrice += item.price * item.quantity;
+    });
+
+    return { totalQuantity, totalPrice };
+  };
+
+  const { totalQuantity, totalPrice } = calculateTotals();
   return (
     <div className="section-gap">
       <h2 className="text-2xl font-semibold">Your Cart</h2>
@@ -60,6 +74,27 @@ const Cart = () => {
           })}
         </tbody>
       </table>
+      <div className="mt-8 flex flex-col items-end justify-end">
+        <table className="w-1/2">
+          <p className="text-2xl font-semibold text-start mb-5">
+            Pricing table:
+          </p>
+          <tbody>
+            <tr>
+              <td className="border py-3 px-5">No. of products:</td>
+              <td className="border py-3 px-5">{cart.length}</td>
+            </tr>
+            <tr>
+              <td className="border py-3 px-5">Total quantity:</td>
+              <td className="border py-3 px-5">{totalQuantity}</td>
+            </tr>
+            <tr className="font-semibold">
+              <td className="border py-3 px-5">Total price:</td>
+              <td className="border py-3 px-5">{totalPrice}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

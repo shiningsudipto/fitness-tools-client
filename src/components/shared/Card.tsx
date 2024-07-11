@@ -25,7 +25,7 @@ const Card: React.FC<CardProps> = ({ product }) => {
             </p>
             <div className="pt-2">
               <Link
-                to={`product-details/${singleProduct?._id}`}
+                to={`/product-details/${singleProduct?._id}`}
                 className="bg-transparent text-secondaryColor border-2 border-primaryColor hover:text-white hover:bg-secondaryColor hover:border-secondaryColor py-1 px-3 rounded font-medium"
               >
                 View Details
