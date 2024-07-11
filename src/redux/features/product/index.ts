@@ -10,11 +10,24 @@ const productAPI = baseApi.injectEndpoints({
         ).toString();
         return `products?${params}`;
       },
+      providesTags: ["Product"],
     }),
     getSingleProduct: builder.query({
       query: (id) => `/product-details/${id}`,
     }),
+    deleteProduct: builder.mutation({
+      query: ({ id }) => ({
+        url: `/product-delete/${id}`,
+        method: "DELETE",
+        body: "",
+      }),
+      invalidatesTags: ["Product"],
+    }),
   }),
 });
 
-export const { useGetProductsQuery, useGetSingleProductQuery } = productAPI;
+export const {
+  useGetProductsQuery,
+  useGetSingleProductQuery,
+  useDeleteProductMutation,
+} = productAPI;

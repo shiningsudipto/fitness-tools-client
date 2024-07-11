@@ -1,10 +1,22 @@
-import { useGetProductsQuery } from "@/redux/features/product";
+import {
+  useDeleteProductMutation,
+  useGetProductsQuery,
+} from "@/redux/features/product";
 import { TProduct } from "@/types";
 import { FaRegTrashAlt, FaRegEdit } from "react-icons/fa";
 
 const ProductManagement = () => {
   const { data } = useGetProductsQuery(undefined);
   const allProducts = data?.data;
+  const [deleteProduct, { data: resDeleteData }] = useDeleteProductMutation();
+  //   console.log("delete-res", resDeleteData);
+  const handleProductDelete = async (id: string) => {
+    try {
+      await deleteProduct({ id });
+    } catch (error) {
+      console.log("error:", error);
+    }
+  };
   return (
     <div className="section-gap">
       <div className="flex items-center justify-between mb-5">
@@ -39,7 +51,11 @@ const ProductManagement = () => {
                 </td>
                 <td>{item?.category}</td>
                 <td className="border-l px-4 py-2 flex items-center gap-x-4 justify-center">
-                  <button title="delete product" className="p-2 ">
+                  <button
+                    onClick={() => handleProductDelete(id)}
+                    title="delete product"
+                    className="p-2 "
+                  >
                     <FaRegTrashAlt className="text-lg text-red-600" />
                   </button>
                   <button title="edit product" className="p-2 ">
