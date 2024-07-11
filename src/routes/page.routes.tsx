@@ -1,4 +1,5 @@
 import About from "@/pages/about/About";
+import Cart from "@/pages/cart/Cart";
 import Details from "@/pages/details/Details";
 import Home from "@/pages/home/Home";
 
@@ -21,7 +22,7 @@ export const pageRoutes = [
       },
       {
         path: "cart",
-        element: <Home />,
+        element: <Cart />,
       },
       {
         path: "checkout",

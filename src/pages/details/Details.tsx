@@ -2,12 +2,28 @@ import { useGetSingleProductQuery } from "@/redux/features/product";
 import { useParams } from "react-router-dom";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { FaCartPlus } from "react-icons/fa";
+import { useAppDispatch } from "@/redux/hooks";
+import { addToCart } from "@/redux/features/cart/cartSlice";
+import { TProduct } from "@/types";
 
 const Details = () => {
   const params = useParams();
   const productId = params?.id;
   const { data } = useGetSingleProductQuery(productId);
   const productDetails = data?.data;
+  const dispatch = useAppDispatch();
+  const handleAddToCart = (product: TProduct) => {
+    console.log(product);
+    dispatch(
+      addToCart({
+        id: product?._id,
+        name: product?.name,
+        price: product?.price,
+        stock: product?.stock,
+        quantity: 1,
+      })
+    );
+  };
   return (
     <div className="section-gap flex justify-between">
       <div className="space-y-2">
@@ -23,6 +39,7 @@ const Details = () => {
           <BsCurrencyDollar />
         </p>
         <button
+          onClick={() => handleAddToCart(productDetails)}
           title="add to cart"
           className="flex items-center gap-2 font-medium hover:bg-secondaryColor bg-primaryColor text-white py-[8px] px-[24px] rounded"
         >
