@@ -1,8 +1,8 @@
 export const categoryOptions = [
-  { label: "Cardio Equipment", value: "cardio_equipment" },
-  { label: "Strength Training", value: "strength_training" },
-  { label: "Yoga & Pilates", value: "yoga_pilates" },
-  { label: "Fitness Accessories", value: "fitness_accessories" },
-  { label: "Home Gym Equipment", value: "home_gym_equipment" },
-  { label: "Recovery & Wellness", value: "recovery_wellness" },
+  { label: "Cardio Equipment", value: "Cardio Equipment" },
+  { label: "Strength Training", value: "Strength Training" },
+  { label: "Yoga & Pilates", value: "Yoga & Pilates" },
+  { label: "Fitness Accessories", value: "Fitness Accessories" },
+  { label: "Home Gym Equipment", value: "Home Gym Equipment" },
+  { label: "Recovery & Wellness", value: "Recovery & Wellness" },
 ];

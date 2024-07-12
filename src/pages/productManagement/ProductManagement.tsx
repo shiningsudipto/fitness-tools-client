@@ -3,6 +3,7 @@ import Input from "@/components/formik/Input";
 import Textarea from "@/components/formik/Textarea";
 import Modal from "@/components/shared/Modal";
 import {
+  useCreateProductMutation,
   useDeleteProductMutation,
   useGetProductsQuery,
 } from "@/redux/features/product";
@@ -10,9 +11,15 @@ import { TProduct } from "@/types";
 import { categoryOptions } from "@/utils/options";
 import { Form, Formik } from "formik";
 import { FaRegTrashAlt, FaRegEdit } from "react-icons/fa";
+import EditProduct from "./components/EditProduct";
 
 const initialValues = {
   name: "",
+  category: "",
+  price: 120,
+  description: "",
+  image: "",
+  stock: 20,
 };
 
 const ProductManagement = () => {
@@ -20,6 +27,17 @@ const ProductManagement = () => {
   const allProducts = data?.data;
   const [deleteProduct, { data: resDeleteData }] = useDeleteProductMutation();
   //   console.log("delete-res", resDeleteData);
+
+  const [
+    productData,
+    { data: resCreateProductData, error: resCreateProductError },
+  ] = useCreateProductMutation();
+  console.log(
+    "res-create-product:",
+    resCreateProductData,
+    resCreateProductError
+  );
+
   const handleProductDelete = async (id: string) => {
     try {
       await deleteProduct({ id });
@@ -28,17 +46,26 @@ const ProductManagement = () => {
     }
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     console.log(values);
+    try {
+      await productData(values);
+    } catch (error) {
+      console.log("error:", error);
+    }
   };
 
   return (
     <div className="section-gap">
       <div className="flex items-center justify-between mb-5">
         <h2 className="text-2xl font-semibold">Manage products!</h2>
-        <Modal label={"Create a product"} title={"Create a product"}>
+        <Modal
+          label={"Create a product"}
+          title={"Create a product"}
+          btnStyle="primary-btn"
+        >
           <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-            {({ values, setFieldValue }) => (
+            {({ setFieldValue }) => (
               <Form className="space-y-4">
                 <Input
                   name="name"
@@ -115,9 +142,16 @@ const ProductManagement = () => {
                   >
                     <FaRegTrashAlt className="text-lg text-red-600" />
                   </button>
-                  <button title="edit product" className="p-2 ">
-                    <FaRegEdit className="text-xl text-primaryColor" />
-                  </button>
+                  <Modal
+                    label={
+                      <>
+                        <FaRegEdit className="text-xl text-primaryColor" />
+                      </>
+                    }
+                    title={"Edit product"}
+                  >
+                    <EditProduct item={item} />
+                  </Modal>
                 </td>
               </tr>
             );

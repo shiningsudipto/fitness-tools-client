@@ -21,6 +21,7 @@ interface DropdownProps {
   placeholder?: string;
   options: Option[];
   optionsLabel?: string;
+  defaultValue?: string;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -30,6 +31,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   placeholder,
   options,
   optionsLabel,
+  defaultValue,
 }) => {
   return (
     <div>
@@ -38,6 +40,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         onValueChange={(value) => {
           setFieldValue(name, value);
         }}
+        defaultValue={defaultValue}
       >
         <SelectTrigger>
           <SelectValue placeholder={placeholder} />

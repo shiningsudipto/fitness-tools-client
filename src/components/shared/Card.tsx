@@ -15,7 +15,7 @@ const Card: React.FC<CardProps> = ({ product, rowItem }) => {
           <div className="group space-y-2 " key={singleProduct?._id}>
             <div className="overflow-hidden">
               <img
-                src={singleProduct?.images[0]}
+                src={singleProduct?.images}
                 className="h-[300px] w-[300px] object-cover transform transition-transform duration-300 group-hover:scale-105"
                 alt=""
               />

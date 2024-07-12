@@ -1,3 +1,4 @@
+import React, { ReactNode } from "react";
 import {
   Dialog,
   DialogContent,
@@ -6,12 +7,17 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const Modal = ({ label, title, children }) => {
+interface ModalProps {
+  label: ReactNode;
+  title: string;
+  children: ReactNode;
+  btnStyle?: string;
+}
+
+const Modal: React.FC<ModalProps> = ({ label, title, children, btnStyle }) => {
   return (
     <Dialog>
-      <DialogTrigger className="py-2 px-4 bg-primaryColor text-white font-semibold rounded-md hover:bg-secondaryColor">
-        {label}
-      </DialogTrigger>
+      <DialogTrigger className={btnStyle}>{label}</DialogTrigger>
       <DialogContent className="lg:w-[500px] lg:mt-[120px]">
         <DialogHeader>
           <DialogTitle className="text-center text-secondaryColor">
