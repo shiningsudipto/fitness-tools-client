@@ -4,6 +4,7 @@ import { Slider } from "@/components/ui/slider";
 import { Form, Formik } from "formik";
 import { useState } from "react";
 import RadioButtons from "@/components/formik/RadioButtons";
+import { categoryOptions } from "@/utils/options";
 
 const initialValues = {
   searchTerm: "",
@@ -21,13 +22,6 @@ const sortByPriceOptions = [
     label: "High to Low",
     value: "desc",
   },
-];
-
-const categoryOptions = [
-  { label: "Cardio", value: "Cardio" },
-  { label: "Strength", value: "Strength" },
-  { label: "Yoga & Pilates", value: "yoga_pilates" },
-  { label: "Accessories", value: "Accessories" },
 ];
 
 const Products = () => {

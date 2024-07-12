@@ -80,7 +80,7 @@
 }
 
 .primary-btn {
-  @apply py-3 px-4 bg-primaryColor text-lg text-white font-semibold rounded-md hover:bg-secondaryColor;
+  @apply py-2 px-4 bg-primaryColor text-lg text-white font-semibold rounded-md hover:bg-secondaryColor;
 }
 
 .heading {

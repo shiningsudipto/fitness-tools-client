@@ -6,11 +6,13 @@ import {
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const cart = useAppSelector((state) => state.cart);
-  console.log(cart);
+  // console.log(cart);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   // Calculate total quantity and total price
   const calculateTotals = () => {
     let totalPrice = 0;
@@ -23,8 +25,12 @@ const Cart = () => {
 
     return { totalQuantity, totalPrice };
   };
-
   const { totalQuantity, totalPrice } = calculateTotals();
+
+  const handleCheckout = () => {
+    navigate("/checkout");
+  };
+
   return (
     <div className="section-gap">
       <h2 className="text-2xl font-semibold">Your Cart</h2>
@@ -90,10 +96,17 @@ const Cart = () => {
             </tr>
             <tr className="font-semibold">
               <td className="border py-3 px-5">Total price:</td>
-              <td className="border py-3 px-5">{totalPrice}</td>
+              <td className="border py-3 px-5">{totalPrice.toFixed(2)}</td>
             </tr>
           </tbody>
         </table>
+        <button
+          disabled={cart?.length === 0}
+          className="primary-btn mt-4"
+          onClick={handleCheckout}
+        >
+          Proceed to checkout
+        </button>
       </div>
     </div>
   );

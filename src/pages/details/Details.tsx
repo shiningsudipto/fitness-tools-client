@@ -47,7 +47,7 @@ const Details = () => {
         </button>
       </div>
       <div>
-        <img src={productDetails?.images[0]} className="w-[500px]" alt="" />
+        <img src={productDetails?.images} className="w-[500px]" alt="" />
       </div>
     </div>
   );
