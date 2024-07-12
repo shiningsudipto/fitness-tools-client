@@ -5,15 +5,15 @@ import cImg3 from "../../../assets/images/category/Kettlebells.png";
 import cImg4 from "../../../assets/images/category/Power-Racks.png";
 import cImg5 from "../../../assets/images/category/Treadmills.png";
 import cImg6 from "../../../assets/images/category/Weight-Benches.png";
-import cImg7 from "../../../assets/images/category/Workout-Gloves.png";
+import { Link } from "react-router-dom";
 
 const categories = [
-  { image: cImg1, label: "Dumbbells" },
-  { image: cImg2, label: "Exercise Bikes" },
-  { image: cImg3, label: "Kettlebells" },
-  { image: cImg4, label: "Power Racks" },
-  { image: cImg5, label: "Treadmills" },
-  { image: cImg6, label: "Weight Benches" },
+  { image: cImg1, label: "Cardio Equipment" },
+  { image: cImg2, label: "Strength Training" },
+  { image: cImg3, label: "Yoga & Pilates" },
+  { image: cImg4, label: "Fitness Accessories" },
+  { image: cImg5, label: "Home Gym Equipment" },
+  { image: cImg6, label: "Recovery & Wellness" },
   //   { image: cImg7, label: "Workout Gloves" },
 ];
 
@@ -23,7 +23,9 @@ const Categories = () => {
       <SectionTitle title="categories" subTitle="tools we provides" />
       <div className="grid grid-cols-3 gap-5">
         {categories.map((category, index) => (
-          <div
+          <Link
+            to={"/products"}
+            state={category.label}
             key={index}
             className="group flex flex-col gap-y-3 items-center justify-center bg-secondaryColor hover:bg-secondaryColor600 rounded-md p-5 cursor-pointer transition duration-300 delay-75"
           >
@@ -35,7 +37,7 @@ const Categories = () => {
             <p className="text-xl font-bold text-white group-hover:text-primaryColor200 transition duration-300 delay-75">
               {category.label}
             </p>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

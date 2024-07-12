@@ -5,13 +5,7 @@ import { Form, Formik } from "formik";
 import { useState } from "react";
 import RadioButtons from "@/components/formik/RadioButtons";
 import { categoryOptions } from "@/utils/options";
-
-const initialValues = {
-  searchTerm: "",
-  sortByPrice: "asc",
-  price: 4000,
-  categories: [],
-};
+import { useLocation } from "react-router-dom";
 
 const sortByPriceOptions = [
   {
@@ -25,6 +19,17 @@ const sortByPriceOptions = [
 ];
 
 const Products = () => {
+  const location = useLocation();
+  const category = location.state;
+  console.log(category);
+
+  const initialValues = {
+    searchTerm: "",
+    sortByPrice: "asc",
+    price: 4000,
+    categories: [`${category ? category : ""}`],
+  };
+
   const [filters, setFilters] = useState(initialValues);
   const { data } = useGetProductsQuery(filters);
   const allProducts = data?.data;
@@ -38,8 +43,8 @@ const Products = () => {
     <div className="section-gap flex gap-x-10">
       {/* Filter section */}
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        {({ values, setFieldValue }) => (
-          <Form className="space-y-4">
+        {({ values, setFieldValue, resetForm }) => (
+          <Form className="space-y-4 border-r lg:pr-10">
             <div>
               <input
                 type="text"
@@ -48,7 +53,7 @@ const Products = () => {
                 placeholder="Search"
                 onChange={(e) => setFieldValue("searchTerm", e.target.value)}
                 value={values.searchTerm}
-                className="border rounded p-2"
+                className="border rounded p-2 w-full"
               />
             </div>
             <div>
@@ -79,9 +84,19 @@ const Products = () => {
             />
             <button
               type="submit"
-              className="bg-primaryColor text-white py-2 px-4 rounded"
+              className="bg-primaryColor font-medium text-white py-2 px-4 rounded"
             >
               Apply Filters
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                resetForm();
+                setFilters(initialValues); // Reset the filters in the state as well
+              }}
+              className="bg-secondaryColor font-medium text-white py-2 px-4 rounded"
+            >
+              Clear Filter
             </button>
           </Form>
         )}
