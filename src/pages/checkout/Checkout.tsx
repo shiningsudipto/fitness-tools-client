@@ -1,6 +1,7 @@
 import InitialForm from "@/components/formik/InitialForm";
 import Input from "@/components/formik/Input";
 import RadioButtons from "@/components/formik/RadioButtons";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {};
 const paymentOptions = [
@@ -15,8 +16,10 @@ const paymentOptions = [
 ];
 
 const Checkout = () => {
+  const navigate = useNavigate();
   const handleSubmit = (values) => {
     console.log(values);
+    navigate("/success");
   };
   return (
     <div className="section-gap">
@@ -34,6 +37,9 @@ const Checkout = () => {
           type="radio"
           label="Choice payment method"
         />
+        <button type="submit" className="primary-btn w-1/2">
+          Place Order
+        </button>
       </InitialForm>
     </div>
   );

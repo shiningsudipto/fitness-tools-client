@@ -5,6 +5,7 @@ import Details from "@/pages/details/Details";
 import Home from "@/pages/home/Home";
 import ProductManagement from "@/pages/productManagement/ProductManagement";
 import Products from "@/pages/products/Products";
+import Success from "@/pages/Success";
 
 export const pageRoutes = [
   {
@@ -30,6 +31,10 @@ export const pageRoutes = [
       {
         path: "checkout",
         element: <Checkout />,
+      },
+      {
+        path: "success",
+        element: <Success />,
       },
       {
         path: "about-us",

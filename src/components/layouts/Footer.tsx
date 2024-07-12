@@ -34,7 +34,7 @@ const links = [
 
 const Footer = () => {
   return (
-    <div className="">
+    <div className="mt-10">
       <div className="flex justify-between p-[60px] bg-slate-50">
         <div className="flex gap-x-5">
           <img src="FT.png" alt="" className="h-[150px] w-auto" />
