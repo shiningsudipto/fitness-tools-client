@@ -78,3 +78,7 @@
 .details-btn {
   @apply bg-transparent text-secondaryColor border-2 border-primaryColor hover:text-white hover:bg-secondaryColor hover:border-secondaryColor;
 }
+
+.primary-btn {
+  @apply py-3 px-4 bg-primaryColor text-lg text-white font-semibold rounded-md hover:bg-secondaryColor;
+}

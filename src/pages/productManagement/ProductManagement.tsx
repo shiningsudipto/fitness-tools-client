@@ -1,9 +1,19 @@
+import Dropdown from "@/components/formik/Dropdown";
+import Input from "@/components/formik/Input";
+import Textarea from "@/components/formik/Textarea";
+import Modal from "@/components/shared/Modal";
 import {
   useDeleteProductMutation,
   useGetProductsQuery,
 } from "@/redux/features/product";
 import { TProduct } from "@/types";
+import { categoryOptions } from "@/utils/options";
+import { Form, Formik } from "formik";
 import { FaRegTrashAlt, FaRegEdit } from "react-icons/fa";
+
+const initialValues = {
+  name: "",
+};
 
 const ProductManagement = () => {
   const { data } = useGetProductsQuery(undefined);
@@ -17,13 +27,60 @@ const ProductManagement = () => {
       console.log("error:", error);
     }
   };
+
+  const handleSubmit = (values) => {
+    console.log(values);
+  };
+
   return (
     <div className="section-gap">
       <div className="flex items-center justify-between mb-5">
         <h2 className="text-2xl font-semibold">Manage products!</h2>
-        <button className="py-2 px-4 bg-primaryColor text-white font-semibold rounded-md hover:bg-secondaryColor">
-          Create a product
-        </button>
+        <Modal label={"Create a product"} title={"Create a product"}>
+          <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+            {({ values, setFieldValue }) => (
+              <Form className="space-y-4">
+                <Input
+                  name="name"
+                  label="Product name"
+                  placeholder="your product name here"
+                />
+                <Input
+                  name="price"
+                  type="number"
+                  label="Price"
+                  placeholder="product price"
+                />
+                <Textarea
+                  name="description"
+                  label="Description"
+                  placeholder="write your product description here"
+                />
+                <Input
+                  name="images"
+                  label="Image link"
+                  placeholder="your product image link here"
+                />
+                <Dropdown
+                  setFieldValue={setFieldValue}
+                  name="category"
+                  label="Category"
+                  placeholder="select category"
+                  options={categoryOptions}
+                />
+                <Input
+                  name="stock"
+                  type="number"
+                  label="Stock"
+                  placeholder="product stock"
+                />
+                <button type="submit" className="primary-btn w-full">
+                  Submit
+                </button>
+              </Form>
+            )}
+          </Formik>
+        </Modal>
       </div>
       <table className="table-fixed w-full border-collapse border border-gray-200 mt-4">
         <thead>
