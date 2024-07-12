@@ -1,6 +1,8 @@
 import InitialForm from "@/components/formik/InitialForm";
 import Input from "@/components/formik/Input";
 import RadioButtons from "@/components/formik/RadioButtons";
+import { useCreateCustomerMutation } from "@/redux/features/customer";
+import { useAppSelector } from "@/redux/hooks";
 import { useNavigate } from "react-router-dom";
 
 const initialValues = {};
@@ -17,8 +19,27 @@ const paymentOptions = [
 
 const Checkout = () => {
   const navigate = useNavigate();
-  const handleSubmit = (values) => {
+  const [customerData, { data, error }] = useCreateCustomerMutation();
+  // console.log("res-create-customer:", data, error);
+
+  const cart = useAppSelector((state) => state.cart);
+
+  const handleSubmit = async (values) => {
     console.log(values);
+    try {
+      await customerData({
+        name: values?.name,
+        email: values?.email,
+        phone: values?.phone,
+        address: values?.address,
+        cartItems: cart.map((item) => ({
+          id: item.id,
+          quantity: item.quantity,
+        })),
+      });
+    } catch (error) {
+      console.log("error:", error);
+    }
     navigate("/success");
   };
   return (
