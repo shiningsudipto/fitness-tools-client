@@ -69,16 +69,16 @@ const Footer = () => {
           <p className="mb-3 font-semibold">Follow us on</p>
           <div className="flex gap-x-4 items-center text-secondaryColor">
             <p>
-              <FaFacebookSquare className="text-2xl hover:text-primaryColor" />{" "}
+              <FaFacebookSquare className="text-2xl hover:text-primaryColor cursor-pointer" />{" "}
             </p>
             <p>
-              <FaInstagramSquare className="text-2xl hover:text-primaryColor" />{" "}
+              <FaInstagramSquare className="text-2xl hover:text-primaryColor cursor-pointer" />{" "}
             </p>
             <p>
-              <IoLogoYoutube className="text-2xl hover:text-primaryColor" />{" "}
+              <IoLogoYoutube className="text-2xl hover:text-primaryColor cursor-pointer" />{" "}
             </p>
             <p>
-              <FaTwitterSquare className="text-2xl hover:text-primaryColor" />{" "}
+              <FaTwitterSquare className="text-2xl hover:text-primaryColor cursor-pointer" />{" "}
             </p>
           </div>
         </div>
