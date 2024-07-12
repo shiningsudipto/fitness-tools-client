@@ -6,7 +6,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const cart = useAppSelector((state) => state.cart);
