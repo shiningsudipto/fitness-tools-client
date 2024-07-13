@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { addToCart } from "@/redux/features/cart/cartSlice";
 import { TProduct } from "@/types";
 import { toast } from "react-toastify";
+import Loader from "@/components/shared/Loader";
 
 const Details = () => {
   const params = useParams();
