@@ -1,13 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Card from "@/components/shared/Card";
 import { useGetProductsQuery } from "@/redux/features/product";
 import { Slider } from "@/components/ui/slider";
-import { Form, Formik } from "formik";
-import { useState } from "react";
-import RadioButtons from "@/components/formik/RadioButtons";
+import { Formik, Form } from "formik";
+import { useState, useCallback } from "react";
 import { categoryOptions } from "@/utils/options";
 import { useLocation } from "react-router-dom";
 import { TProduct } from "@/types";
 import Loader from "@/components/shared/Loader";
+import debounce from "lodash.debounce";
+
 interface FormValues {
   searchTerm: string;
   sortByPrice: "asc" | "desc";
@@ -29,7 +31,6 @@ const sortByPriceOptions = [
 const Products = () => {
   const location = useLocation();
   const category = location.state as string;
-  // console.log(category);
 
   const initialValues: FormValues = {
     searchTerm: "",
@@ -42,9 +43,51 @@ const Products = () => {
   const { data, isLoading } = useGetProductsQuery(filters);
   const allProducts: TProduct[] = data?.data;
 
-  const handleSubmit = (values: FormValues) => {
-    // console.log("Form submitted with:", values);
-    setFilters(values);
+  const debouncedSetFilters = useCallback(
+    debounce((newFilters: FormValues) => setFilters(newFilters), 300),
+    []
+  );
+
+  const handleSearchChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    setFieldValue: (field: string, value: any) => void,
+    values: FormValues
+  ) => {
+    setFieldValue("searchTerm", e.target.value);
+    debouncedSetFilters({ ...values, searchTerm: e.target.value });
+  };
+
+  const handlePriceChange = (
+    value: number[],
+    setFieldValue: (field: string, value: any) => void,
+    values: FormValues
+  ) => {
+    setFieldValue("price", value[0]);
+    debouncedSetFilters({ ...values, price: value[0] });
+  };
+
+  const handleSortChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    setFieldValue: (field: string, value: any) => void,
+    values: FormValues
+  ) => {
+    setFieldValue("sortByPrice", e.target.value);
+    debouncedSetFilters({
+      ...values,
+      sortByPrice: e.target.value as "asc" | "desc",
+    });
+  };
+
+  const handleCategoryChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    setFieldValue: (field: string, value: any) => void,
+    values: FormValues
+  ) => {
+    const newCategories = e.target.checked
+      ? [...values.categories, e.target.value]
+      : values.categories.filter((v) => v !== e.target.value);
+    setFieldValue("categories", newCategories);
+    debouncedSetFilters({ ...values, categories: newCategories });
   };
 
   if (isLoading) {
@@ -54,7 +97,7 @@ const Products = () => {
   return (
     <div className="section-gap flex lg:flex-row flex-col gap-x-10 gap-y-8">
       {/* Filter section */}
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      <Formik initialValues={initialValues} onSubmit={() => {}}>
         {({ values, setFieldValue }) => (
           <Form className="space-y-4 lg:border-r lg:pr-10">
             <div>
@@ -63,7 +106,7 @@ const Products = () => {
                 id="searchTerm"
                 name="searchTerm"
                 placeholder="Search"
-                onChange={(e) => setFieldValue("searchTerm", e.target.value)}
+                onChange={(e) => handleSearchChange(e, setFieldValue, values)}
                 value={values.searchTerm}
                 className="border rounded p-2 w-full"
               />
@@ -77,39 +120,78 @@ const Products = () => {
                 defaultValue={[values.price]}
                 max={5000}
                 step={1}
-                onValueChange={(e) => {
-                  setFieldValue("price", e[0]);
-                }}
+                onValueChange={(value) =>
+                  handlePriceChange(value, setFieldValue, values)
+                }
               />
             </div>
-            <RadioButtons
-              label="Sort by price"
-              options={sortByPriceOptions}
-              name="sortByPrice"
-              type="radio"
-            />
-            <RadioButtons
-              label="Select category"
-              options={categoryOptions}
-              name="categories"
-              type="checkbox"
-            />
+            <div className="font-publicSans">
+              <p className="font-medium mb-2">Sort by price</p>
+              <div className="flex flex-col gap-y-1">
+                {sortByPriceOptions.map((option) => (
+                  <div
+                    key={option.label}
+                    className="form-control flex items-center gap-x-2"
+                  >
+                    <input
+                      type="radio"
+                      id={option.value}
+                      name="sortByPrice"
+                      value={option.value}
+                      checked={values.sortByPrice === option.value}
+                      onChange={(e) =>
+                        handleSortChange(e, setFieldValue, values)
+                      }
+                      className="accent-secondaryColor radio"
+                    />
+                    <label
+                      htmlFor={option.value}
+                      className="label flex flex-col items-start cursor-pointer"
+                    >
+                      {option.label}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="font-publicSans">
+              <p className="font-medium mb-2">Select category</p>
+              <div className="flex flex-col gap-y-1">
+                {categoryOptions.map((option) => (
+                  <div
+                    key={option.label}
+                    className="form-control flex items-center gap-x-2"
+                  >
+                    <input
+                      type="checkbox"
+                      id={option.value}
+                      name="categories"
+                      value={option.value}
+                      checked={values.categories.includes(option.value)}
+                      onChange={(e) =>
+                        handleCategoryChange(e, setFieldValue, values)
+                      }
+                      className="accent-secondaryColor checkbox"
+                    />
+                    <label
+                      htmlFor={option.value}
+                      className="label flex flex-col items-start cursor-pointer"
+                    >
+                      {option.label}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
             <div className="flex lg:flex-col flex-row gap-x-5 gap-y-4">
-              <button
-                type="submit"
-                className="bg-primaryColor font-medium text-white py-2 px-4 rounded"
-              >
-                Apply Filters
-              </button>
               <button
                 type="button"
                 onClick={() => {
-                  // resetForm();
-                  setFilters(initialValues); // Reset the filters in the state as well
+                  setFilters(initialValues);
                   setFieldValue("searchTerm", "");
                   setFieldValue("sortByPrice", "asc");
                   setFieldValue("price", 4000);
-                  setFieldValue("categories", "");
+                  setFieldValue("categories", []);
                 }}
                 className="bg-secondaryColor font-medium text-white py-2 px-4 rounded"
               >
