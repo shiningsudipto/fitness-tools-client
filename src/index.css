@@ -72,7 +72,7 @@
 }
 
 .section-gap {
-  @apply px-[60px] my-[60px];
+  @apply lg:px-[60px] px-5 my-8 lg:my-[60px];
 }
 
 .details-btn {

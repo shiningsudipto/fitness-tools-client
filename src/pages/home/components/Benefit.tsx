@@ -4,20 +4,20 @@ import img2 from "../../../assets/images/Benefits2.webp";
 const Benefit = () => {
   return (
     <div className="section-gap">
-      <div className="grid grid-cols-2 gap-5">
+      <div className="grid lg:grid-cols-2 grid-cols-1 gap-5">
         <div className="relative">
           <img
             src={img1}
             alt=""
-            className="absolute w-[400px] h-[400px] object-cover rounded-md"
+            className="absolute lg:w-[400px] w-[60%] lg:h-[400px] object-cover rounded-md"
           />
           <img
             src={img2}
             alt=""
-            className="absolute w-[400px] h-[400px] object-cover top-[200px] left-[200px] rounded-md"
+            className="absolute lg:w-[400px] w-[60%] lg:h-[400px] object-cover lg:top-[200px] lg:left-[200px] top-[100px] left-[40%] rounded-md"
           />
         </div>
-        <div>
+        <div className="lg:mt-auto mt-[330px]">
           <p className="text-4xl font-bold mb-3 text-primaryColor">Benefit!</p>
           <p className="mb-5 text-xl font-semibold">
             Benefits of Fitness Products from Fitness Tolls!

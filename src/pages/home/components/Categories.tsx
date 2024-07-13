@@ -19,9 +19,9 @@ const categories = [
 
 const Categories = () => {
   return (
-    <div className="px-[60px] my-5">
+    <div className="section-gap">
       <SectionTitle title="categories" subTitle="tools we provides" />
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid lg:grid-cols-3 grid-cols-1 gap-5">
         {categories.map((category, index) => (
           <Link
             to={"/products"}

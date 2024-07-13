@@ -19,7 +19,7 @@ const Card: React.FC<CardProps> = ({ product, rowItem }) => {
           </p>
         </div>
       ) : (
-        <div className={`grid grid-cols-${rowItem} gap-5`}>
+        <div className={`grid lg:grid-cols-${rowItem} grid-cols-1 gap-5`}>
           {product?.map((singleProduct) => {
             return (
               <div
@@ -29,7 +29,7 @@ const Card: React.FC<CardProps> = ({ product, rowItem }) => {
                 <div className="overflow-hidden">
                   <img
                     src={singleProduct?.images}
-                    className="h-[300px] w-[300px] object-cover transform transition-transform duration-300 group-hover:scale-105 rounded-md"
+                    className="lg:h-[300px] lg:w-[300px] w-full h-[300px] object-cover transform transition-transform duration-300 group-hover:scale-105 rounded-md"
                     alt=""
                   />
                 </div>

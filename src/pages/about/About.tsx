@@ -62,8 +62,8 @@ const About = () => {
       {/* About US */}
       <section>
         <SectionTitle title={"About us"} subTitle={"who we are"} />
-        <div className="flex justify-between gap-x-5">
-          <img src={img1} alt="" className="w-[35%] rounded-md" />
+        <div className="flex lg:flex-row flex-col justify-between gap-x-5 gap-y-5">
+          <img src={img1} alt="" className="lg:w-[35%] w-full rounded-md" />
           <div>
             <h2 className="heading mb-4">History of Fitness Tools</h2>
             <p>
@@ -77,7 +77,7 @@ const About = () => {
             </p>
           </div>
         </div>
-        <div className="flex justify-between gap-x-5 mt-5">
+        <div className="flex lg:flex-row flex-col-reverse justify-between gap-x-5 gap-y-5">
           <div className="space-y-5">
             <div>
               <h2 className="heading mb-4">Our Mission</h2>
@@ -103,18 +103,22 @@ const About = () => {
               </p>
             </div>
           </div>
-          <img src={img2} alt="" className="w-[35%] rounded-md" />
+          <img
+            src={img2}
+            alt=""
+            className="lg:w-[35%] w-full rounded-md lg:mt-0 mt-5"
+          />
         </div>
       </section>
       {/* About Team */}
       <section className="flex flex-col gap-y-5">
         <SectionTitle title={"Team"} subTitle={"team introduction"} />
-        <div className="flex gap-x-5">
-          <div className="flex gap-x-5">
+        <div className="flex lg:flex-row flex-col gap-x-5">
+          <div className="flex lg:flex-row flex-col gap-x-5 gap-y-5">
             <img
               src={img3}
               alt=""
-              className="w-[250px] h-[300px] object-cover rounded-md"
+              className="lg:w-[250px] lg:h-[300px] object-cover rounded-md"
             />
             <div className="">
               <h3 className="font-semibold text-xl mb-2">CEO and Co-Founder</h3>
@@ -129,13 +133,13 @@ const About = () => {
               </p>
             </div>
           </div>
-          <div className="flex gap-x-5">
+          <div className="flex lg:flex-row flex-col gap-x-5">
             <img
               src={img4}
               alt=""
-              className="w-[250px] h-[300px] object-cover rounded-md"
+              className="lg:w-[250px] lg:h-[300px] object-cover rounded-md"
             />
-            <div className="">
+            <div className="space-y-5">
               <h3 className="font-semibold text-xl mb-2">
                 Chief Marketing Officer
               </h3>
@@ -151,12 +155,12 @@ const About = () => {
             </div>
           </div>
         </div>
-        <div className="flex gap-5">
-          <div className="flex gap-x-5">
+        <div className="flex lg:flex-row flex-col gap-5">
+          <div className="flex lg:flex-row flex-col gap-x-5 gap-y-5">
             <img
               src={img5}
               alt=""
-              className="w-[250px] h-[300px] object-cover rounded-md"
+              className="lg:w-[250px] lg:h-[300px] object-cover rounded-md"
             />
             <div className="">
               <h3 className="font-semibold text-xl mb-2">
@@ -173,11 +177,11 @@ const About = () => {
               </p>
             </div>
           </div>
-          <div className="flex gap-x-5">
+          <div className="flex lg:flex-row flex-col gap-x-5 gap-y-5">
             <img
               src={img6}
               alt=""
-              className="w-[250px] h-[300px] object-cover rounded-md"
+              className="lg:w-[250px] lg:h-[300px] object-cover rounded-md"
             />
             <div className="">
               <h3 className="font-semibold text-xl mb-2">
@@ -235,7 +239,7 @@ const About = () => {
           title={"Contact Information"}
           subTitle={"don't forget to send feedback"}
         />
-        <div className="grid grid-cols-4">
+        <div className="grid lg:grid-cols-4 grid-cols-1 gap-y-5">
           <div className="">
             <h3 className="text-xl font-medium mb-4">Address:</h3>
             <p>Fitness Tools Headquarters</p>

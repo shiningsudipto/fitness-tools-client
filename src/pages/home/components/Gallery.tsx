@@ -16,7 +16,7 @@ const Gallery = () => {
   return (
     <div>
       <SectionTitle title="gallery" subTitle="our healthy customers" />
-      <div className="photo-gallery">
+      <div className="photo-gallery flex lg:flex-row flex-col gap-5 lg:px-auto px-4">
         <div className="column">
           <div className="photo">
             <img

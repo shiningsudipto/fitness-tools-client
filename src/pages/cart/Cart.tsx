@@ -37,58 +37,70 @@ const Cart = () => {
 
   return (
     <div className="section-gap">
-      <h2 className="text-2xl font-semibold">Your Cart</h2>
-      <table className="table-fixed w-full border-collapse border border-gray-200 mt-4">
-        <thead>
-          <tr>
-            <th className="border border-gray-200 px-4 py-2">No.</th>
-            <th className="border border-gray-200 px-4 py-2">Name</th>
-            <th className="border border-gray-200 px-4 py-2">Price</th>
-            <th className="border border-gray-200 px-4 py-2">Quantity</th>
-            <th className="border border-gray-200 px-4 py-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cart?.map((item, index) => {
-            const id = item?.id;
-            return (
-              <tr key={index} className="text-center border-b">
-                <td className="border border-gray-200 px-4 py-2">
-                  {index + 1}
-                </td>
-                <td className="border border-gray-200 px-4 py-2">
-                  {item?.name}
-                </td>
-                <td className="border border-gray-200 px-4 py-2">
-                  {item?.price}
-                </td>
-                <td className="h-[52px] flex items-center justify-center gap-x-3">
-                  <button onClick={() => dispatch(decreaseQuantity({ id }))}>
-                    <FiMinusCircle className="text-lg text-secondaryColor" />{" "}
-                  </button>{" "}
-                  {item?.quantity}
-                  <button onClick={() => dispatch(increaseQuantity({ id }))}>
-                    <FiPlusCircle className="text-lg text-secondaryColor" />{" "}
-                  </button>
-                </td>
-                <td className="border border-gray-200 px-4 py-2">
-                  <button
-                    onClick={() => {
-                      setDeleteProductId(id);
-                      setProductDeleteModalOpen(true);
-                    }}
-                    className="p-2 "
-                  >
-                    <FaRegTrashAlt className="text-lg text-red-600" />
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <div className="mt-8 flex flex-col items-end justify-end">
-        <table className="w-1/2">
+      <h2 className="text-2xl font-semibold ">Your Cart</h2>
+      <div className="overflow-x-auto">
+        <table className="table-fixed w-full border-collapse border border-gray-200 mt-4">
+          <thead>
+            <tr>
+              <th className="border border-gray-200 px-4 py-2 w-[100px]">
+                No.
+              </th>
+              <th className="border border-gray-200 px-4 py-2 w-[100px]">
+                Name
+              </th>
+              <th className="border border-gray-200 px-4 py-2 w-[100px]">
+                Price
+              </th>
+              <th className="border border-gray-200 px-4 py-2 w-[100px]">
+                Quantity
+              </th>
+              <th className="border border-gray-200 px-4 py-2 w-[100px]">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {cart?.map((item, index) => {
+              const id = item?.id;
+              return (
+                <tr key={index} className="text-center border-b">
+                  <td className="border border-gray-200 px-4 py-2">
+                    {index + 1}
+                  </td>
+                  <td className="border border-gray-200 px-4 py-2">
+                    {item?.name}
+                  </td>
+                  <td className="border border-gray-200 px-4 py-2">
+                    {item?.price}
+                  </td>
+                  <td className="h-[52px] flex items-center justify-center gap-x-3">
+                    <button onClick={() => dispatch(decreaseQuantity({ id }))}>
+                      <FiMinusCircle className="text-lg text-secondaryColor" />{" "}
+                    </button>{" "}
+                    {item?.quantity}
+                    <button onClick={() => dispatch(increaseQuantity({ id }))}>
+                      <FiPlusCircle className="text-lg text-secondaryColor" />{" "}
+                    </button>
+                  </td>
+                  <td className="border border-gray-200 px-4 py-2">
+                    <button
+                      onClick={() => {
+                        setDeleteProductId(id);
+                        setProductDeleteModalOpen(true);
+                      }}
+                      className="p-2 "
+                    >
+                      <FaRegTrashAlt className="text-lg text-red-600" />
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <div className="mt-8 flex flex-col lg:items-end lg:justify-end">
+        <table className="lg:w-1/2 w-full">
           <p className="text-2xl font-semibold text-start mb-5">
             Pricing table:
           </p>

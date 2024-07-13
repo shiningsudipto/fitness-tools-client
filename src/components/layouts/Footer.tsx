@@ -35,9 +35,9 @@ const links = [
 const Footer = () => {
   return (
     <div className="mt-10">
-      <div className="flex justify-between p-[60px] bg-slate-50">
-        <div className="flex gap-x-5">
-          <img src="FT.png" alt="" className="h-[150px] w-auto" />
+      <div className="flex lg:flex-row lg:gap-y-0 gap-y-5 flex-col justify-between p-[60px] bg-slate-50">
+        <div className="flex lg:flex-row flex-col lg:gap-x-5 lg:gap-y-0 gap-y-5">
+          <img src="FT.png" alt="" className="lg:h-[150px] w-auto" />
           <div className="space-y-2">
             <p className="text-3xl font-bold leading-0 -mt-2">
               <span className="text-secondaryColor">Fitness</span>{" "}

@@ -32,7 +32,7 @@ const Details = () => {
     );
   };
   return (
-    <div className="section-gap flex justify-between">
+    <div className="section-gap flex lg:flex-row flex-col justify-between gap-y-5">
       <div className="space-y-2">
         <h2 className="text-2xl font-semibold text-secondaryColor">
           {productDetails?.name}
@@ -58,7 +58,11 @@ const Details = () => {
         </button>
       </div>
       <div>
-        <img src={productDetails?.images} className="w-[500px]" alt="" />
+        <img
+          src={productDetails?.images}
+          className="lg:w-[500px] w-full rounded-md"
+          alt=""
+        />
       </div>
     </div>
   );

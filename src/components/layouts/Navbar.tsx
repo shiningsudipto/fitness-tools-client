@@ -35,14 +35,14 @@ const Navbar = () => {
     },
   ];
   return (
-    <div className="h-[60px] flex justify-between px-[60px] py-2">
-      <div className="flex gap-x-2 items-center">
+    <div className="h-[60px] flex justify-between items-center lg:px-[60px] px-5 py-2">
+      <Link to={"/"} className="flex gap-x-2 items-center">
         <img src="FT.png" alt="" className="h-[42px]" />
         <p className="text-3xl font-bold">
           <span className="text-secondaryColor">Fitness</span>{" "}
           <span className="text-primaryColor">Tools</span>
         </p>
-      </div>
+      </Link>
       <div className="md:flex items-center gap-x-3 font-medium hidden">
         {links?.map((menu, idx) => (
           <Link key={idx} to={menu?.path}>
@@ -68,6 +68,10 @@ const Navbar = () => {
                   {menu?.name}
                 </Link>
               ))}
+              <Link to="/cart" className="flex items-center text-primaryColor">
+                Cart <FaCartPlus className="ms-1" />{" "}
+                <span className="ms-1 -mt-2">{cart.length}</span>
+              </Link>
             </div>
           </DrawerContent>
         </Drawer>
