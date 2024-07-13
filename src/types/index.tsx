@@ -17,3 +17,12 @@ export interface ProductFilters {
   sortByPrice?: "asc" | "desc";
   price?: number;
 }
+
+export interface TProductFormValues {
+  name: string;
+  price: number;
+  description: string;
+  images: string;
+  category: string;
+  stock: number;
+}

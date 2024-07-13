@@ -5,7 +5,22 @@ import { useCreateCustomerMutation } from "@/redux/features/customer";
 import { useAppSelector } from "@/redux/hooks";
 import { useNavigate } from "react-router-dom";
 
-const initialValues = {};
+interface FormValues {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  paymentMethod: string;
+}
+
+const initialValues: FormValues = {
+  name: "",
+  email: "",
+  phone: "",
+  address: "",
+  paymentMethod: "",
+};
+
 const paymentOptions = [
   {
     label: "Cash on delivery",
@@ -24,8 +39,8 @@ const Checkout = () => {
 
   const cart = useAppSelector((state) => state.cart);
 
-  const handleSubmit = async (values) => {
-    console.log(values);
+  const handleSubmit = async (values: FormValues) => {
+    // console.log(values);
     try {
       await customerData({
         name: values?.name,

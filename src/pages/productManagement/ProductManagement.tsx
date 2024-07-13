@@ -7,25 +7,25 @@ import {
   useDeleteProductMutation,
   useGetProductsQuery,
 } from "@/redux/features/product";
-import { TProduct } from "@/types";
+import { TProduct, TProductFormValues } from "@/types";
 import { categoryOptions } from "@/utils/options";
 import { Form, Formik } from "formik";
 import { FaRegTrashAlt, FaRegEdit } from "react-icons/fa";
 import EditProduct from "./components/EditProduct";
 
-const initialValues = {
+const initialValues: TProductFormValues = {
   name: "",
   category: "",
   price: 120,
   description: "",
-  image: "",
+  images: "",
   stock: 20,
 };
 
 const ProductManagement = () => {
-  const { data } = useGetProductsQuery(undefined);
+  const { data } = useGetProductsQuery({});
   const allProducts = data?.data;
-  const [deleteProduct, { data: resDeleteData }] = useDeleteProductMutation();
+  const [deleteProduct] = useDeleteProductMutation();
   //   console.log("delete-res", resDeleteData);
 
   const [
@@ -46,8 +46,8 @@ const ProductManagement = () => {
     }
   };
 
-  const handleSubmit = async (values) => {
-    console.log(values);
+  const handleSubmit = async (values: TProductFormValues) => {
+    // console.log(values);
     try {
       await productData(values);
     } catch (error) {

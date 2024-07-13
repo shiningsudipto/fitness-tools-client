@@ -13,7 +13,7 @@ const Details = () => {
   const productDetails = data?.data;
   const dispatch = useAppDispatch();
   const handleAddToCart = (product: TProduct) => {
-    console.log(product);
+    // console.log(product);
     dispatch(
       addToCart({
         id: product?._id,

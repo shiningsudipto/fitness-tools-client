@@ -8,7 +8,7 @@ interface InputProps {
   value?: string;
   readOnly?: boolean;
   placeholder?: string;
-  defaultValue?: string;
+  defaultValue?: string | number;
   required?: boolean;
 }
 

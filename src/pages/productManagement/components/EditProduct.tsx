@@ -2,14 +2,19 @@ import Dropdown from "@/components/formik/Dropdown";
 import Input from "@/components/formik/Input";
 import Textarea from "@/components/formik/Textarea";
 import { useUpdateProductMutation } from "@/redux/features/product";
+import { TProduct, TProductFormValues } from "@/types";
 import { categoryOptions } from "@/utils/options";
 import { Form, Formik } from "formik";
 
-const EditProduct = ({ item }) => {
-  const [productData, { data, error }] = useUpdateProductMutation();
+interface EditProductProps {
+  item: TProduct;
+}
+
+const EditProduct: React.FC<EditProductProps> = ({ item }) => {
+  const [productData] = useUpdateProductMutation();
   // console.log("res:", data, error);
 
-  const initialValues = {
+  const initialValues: TProductFormValues = {
     name: item?.name,
     price: item?.price,
     description: item?.description,
@@ -17,7 +22,7 @@ const EditProduct = ({ item }) => {
     category: item?.category,
     stock: item?.stock,
   };
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values: TProductFormValues) => {
     // console.log(values);
     try {
       await productData({ productData: values, id: item._id });

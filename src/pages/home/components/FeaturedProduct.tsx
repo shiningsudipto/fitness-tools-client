@@ -4,7 +4,7 @@ import { useGetProductsQuery } from "@/redux/features/product";
 import { Link } from "react-router-dom";
 
 const FeaturedProduct = () => {
-  const { data, isLoading } = useGetProductsQuery(undefined);
+  const { data, isLoading } = useGetProductsQuery({});
   const firstFourProducts = data?.data.slice(0, 4);
   if (isLoading) {
     return <p>Loading...</p>;

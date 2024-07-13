@@ -15,7 +15,11 @@ interface Option {
 }
 
 interface DropdownProps {
-  setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
+  setFieldValue: (
+    field: string,
+    value: unknown,
+    shouldValidate?: boolean
+  ) => void;
   name: string;
   label?: string;
   placeholder?: string;

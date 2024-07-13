@@ -6,6 +6,13 @@ import { useState } from "react";
 import RadioButtons from "@/components/formik/RadioButtons";
 import { categoryOptions } from "@/utils/options";
 import { useLocation } from "react-router-dom";
+import { TProduct } from "@/types";
+interface FormValues {
+  searchTerm: string;
+  sortByPrice: "asc" | "desc";
+  price: number;
+  categories: string[];
+}
 
 const sortByPriceOptions = [
   {
@@ -20,10 +27,10 @@ const sortByPriceOptions = [
 
 const Products = () => {
   const location = useLocation();
-  const category = location.state;
-  console.log(category);
+  const category = location.state as string;
+  // console.log(category);
 
-  const initialValues = {
+  const initialValues: FormValues = {
     searchTerm: "",
     sortByPrice: "asc",
     price: 4000,
@@ -32,9 +39,9 @@ const Products = () => {
 
   const [filters, setFilters] = useState(initialValues);
   const { data } = useGetProductsQuery(filters);
-  const allProducts = data?.data;
+  const allProducts: TProduct[] = data?.data;
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values: FormValues) => {
     // console.log("Form submitted with:", values);
     setFilters(values);
   };

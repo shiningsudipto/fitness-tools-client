@@ -10,9 +10,7 @@ import img6 from "../../assets/images/t2.jpg";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
-import { IoLogoYoutube } from "react-icons/io5";
 import { FaTwitterSquare } from "react-icons/fa";
-import { FaLocationDot } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaSquarePhone } from "react-icons/fa6";
 
