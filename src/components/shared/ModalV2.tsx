@@ -10,7 +10,7 @@ interface ModalProps {
   panelStyle?: string;
 }
 
-const Modal: React.FC<ModalProps> = ({
+const ModalV2: React.FC<ModalProps> = ({
   isOpen,
   setIsOpen,
   children,
@@ -70,4 +70,4 @@ const Modal: React.FC<ModalProps> = ({
   );
 };
 
-export default Modal;
+export default ModalV2;

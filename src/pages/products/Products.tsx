@@ -7,6 +7,7 @@ import RadioButtons from "@/components/formik/RadioButtons";
 import { categoryOptions } from "@/utils/options";
 import { useLocation } from "react-router-dom";
 import { TProduct } from "@/types";
+import Loader from "@/components/shared/Loader";
 interface FormValues {
   searchTerm: string;
   sortByPrice: "asc" | "desc";
@@ -38,13 +39,17 @@ const Products = () => {
   };
 
   const [filters, setFilters] = useState(initialValues);
-  const { data } = useGetProductsQuery(filters);
+  const { data, isLoading } = useGetProductsQuery(filters);
   const allProducts: TProduct[] = data?.data;
 
   const handleSubmit = (values: FormValues) => {
     // console.log("Form submitted with:", values);
     setFilters(values);
   };
+
+  if (isLoading) {
+    <Loader />;
+  }
 
   return (
     <div className="section-gap flex gap-x-10">

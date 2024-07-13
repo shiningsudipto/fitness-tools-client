@@ -3,6 +3,7 @@ import baseApi from "../../api/baseApi";
 
 const productAPI = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     getProducts: builder.query<any, ProductFilters>({
       query: (filters) => {
         const params = new URLSearchParams(
@@ -14,6 +15,7 @@ const productAPI = baseApi.injectEndpoints({
     }),
     getSingleProduct: builder.query({
       query: (id) => `/product-details/${id}`,
+      providesTags: ["Product"],
     }),
     deleteProduct: builder.mutation({
       query: ({ id }) => ({

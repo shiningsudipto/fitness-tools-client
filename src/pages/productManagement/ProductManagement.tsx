@@ -16,6 +16,7 @@ import { DialogClose } from "@/components/ui/dialog";
 import ModalV2 from "@/components/shared/ModalV2";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import Loader from "@/components/shared/Loader";
 
 const initialValues: TProductFormValues = {
   name: "",
@@ -27,7 +28,7 @@ const initialValues: TProductFormValues = {
 };
 
 const ProductManagement = () => {
-  const { data } = useGetProductsQuery({});
+  const { data, isLoading } = useGetProductsQuery({});
   const allProducts = data?.data;
   const [deleteProduct] = useDeleteProductMutation();
   //   console.log("delete-res", resDeleteData);
@@ -77,93 +78,98 @@ const ProductManagement = () => {
     }
   };
 
+  if (isLoading) {
+    <Loader />;
+  }
+
   return (
-    <div className="section-gap">
-      <div className="flex items-center justify-between mb-5">
-        <h2 className="text-2xl font-semibold">Manage products!</h2>
-        <button
-          className="primary-btn"
-          onClick={() => setCreateProductModalOpen(true)}
-        >
-          Create a produc
-        </button>
-      </div>
-      <table className="table-fixed w-full border-collapse border border-gray-200 mt-4">
-        <thead>
-          <tr>
-            <th className="border border-gray-200 px-4 py-2">No.</th>
-            <th className="border border-gray-200 px-4 py-2">Name</th>
-            <th className="border border-gray-200 px-4 py-2">Price</th>
-            <th className="border border-gray-200 px-4 py-2">Category</th>
-            <th className="border border-gray-200 px-4 py-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {allProducts?.map((item: TProduct, index: number) => {
-            const id = item?._id;
-            return (
-              <tr key={index} className="text-center border-b">
-                <td className="border border-gray-200 px-4 py-2">
-                  {index + 1}
-                </td>
-                <td className="border border-gray-200 px-4 py-2">
-                  {item?.name}
-                </td>
-                <td className="border border-gray-200 px-4 py-2">
-                  {item?.price}
-                </td>
-                <td>{item?.category}</td>
-                <td className="border-l px-4 py-2 flex items-center gap-x-4 justify-center">
-                  <Modal
-                    label={
-                      <>
-                        <button title="delete product" className="p-2 ">
-                          <FaRegTrashAlt className="text-lg text-red-600" />
-                        </button>
-                      </>
-                    }
-                  >
-                    <div className="flex flex-col justify-center items-center space-y-2">
-                      <p className="text-xl font-bold">Are you sure?</p>
-                      <p className="text-lg font-semibold">
-                        You want to delete it?
-                      </p>
-                      <div className="flex items-center gap-x-4 pt-3">
-                        <DialogClose asChild>
-                          <button className="bg-secondaryColor text-lg font-medium text-white py-1 px-3 rounded-md hover:bg-secondaryColor500">
-                            Cancel
+    <>
+      <div className="section-gap">
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="text-2xl font-semibold">Manage products!</h2>
+          <button
+            className="primary-btn"
+            onClick={() => setCreateProductModalOpen(true)}
+          >
+            Create a product
+          </button>
+        </div>
+        <table className="table-fixed w-full border-collapse border border-gray-200 mt-4">
+          <thead>
+            <tr>
+              <th className="border border-gray-200 px-4 py-2">No.</th>
+              <th className="border border-gray-200 px-4 py-2">Name</th>
+              <th className="border border-gray-200 px-4 py-2">Price</th>
+              <th className="border border-gray-200 px-4 py-2">Category</th>
+              <th className="border border-gray-200 px-4 py-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {allProducts?.map((item: TProduct, index: number) => {
+              const id = item?._id;
+              return (
+                <tr key={index} className="text-center border-b">
+                  <td className="border border-gray-200 px-4 py-2">
+                    {index + 1}
+                  </td>
+                  <td className="border border-gray-200 px-4 py-2">
+                    {item?.name}
+                  </td>
+                  <td className="border border-gray-200 px-4 py-2">
+                    {item?.price}
+                  </td>
+                  <td>{item?.category}</td>
+                  <td className="border-l px-4 py-2 flex items-center gap-x-4 justify-center">
+                    <Modal
+                      label={
+                        <>
+                          <button title="delete product" className="p-2 ">
+                            <FaRegTrashAlt className="text-lg text-red-600" />
                           </button>
-                        </DialogClose>
-                        <DialogClose asChild>
-                          <button
-                            className="bg-primaryColor text-lg font-medium text-white py-1 px-3 rounded-md hover:bg-primaryColor500"
-                            onClick={() => handleProductDelete(id)}
-                          >
-                            Delete
-                          </button>
-                        </DialogClose>
+                        </>
+                      }
+                    >
+                      <div className="flex flex-col justify-center items-center space-y-2">
+                        <p className="text-xl font-bold">Are you sure?</p>
+                        <p className="text-lg font-semibold">
+                          You want to delete it?
+                        </p>
+                        <div className="flex items-center gap-x-4 pt-3">
+                          <DialogClose asChild>
+                            <button className="bg-secondaryColor text-lg font-medium text-white py-1 px-3 rounded-md hover:bg-secondaryColor500">
+                              Cancel
+                            </button>
+                          </DialogClose>
+                          <DialogClose asChild>
+                            <button
+                              className="bg-primaryColor text-lg font-medium text-white py-1 px-3 rounded-md hover:bg-primaryColor500"
+                              onClick={() => handleProductDelete(id)}
+                            >
+                              Delete
+                            </button>
+                          </DialogClose>
+                        </div>
                       </div>
-                    </div>
-                  </Modal>
-                  <FaRegEdit
-                    onClick={() => {
-                      setEditableItem(item);
-                      setEditProductModalOpen(true);
-                    }}
-                    className="text-xl text-primaryColor"
-                  />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <ModalV2
+                    </Modal>
+                    <FaRegEdit
+                      onClick={() => {
+                        setEditableItem(item);
+                        setEditProductModalOpen(true);
+                      }}
+                      className="text-xl text-primaryColor"
+                    />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <EditProduct
         isOpen={isEditProductModalOpen}
         setIsOpen={setEditProductModalOpen}
-      >
-        <EditProduct item={editableItem} />
-      </ModalV2>
+        item={editableItem}
+      />
       <ModalV2
         isOpen={isCreateProductModalOpen}
         setIsOpen={setCreateProductModalOpen}
@@ -219,7 +225,7 @@ const ProductManagement = () => {
           )}
         </Formik>
       </ModalV2>
-    </div>
+    </>
   );
 };
 

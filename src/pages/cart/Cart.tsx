@@ -7,9 +7,13 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import ModalV2 from "@/components/shared/ModalV2";
 
 const Cart = () => {
   const cart = useAppSelector((state) => state.cart);
+  const [isProductDeleteModalOpen, setProductDeleteModalOpen] = useState(false);
+  const [deleteProductId, setDeleteProductId] = useState("");
   // console.log(cart);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -69,7 +73,10 @@ const Cart = () => {
                 </td>
                 <td className="border border-gray-200 px-4 py-2">
                   <button
-                    onClick={() => dispatch(removeFromCart({ id }))}
+                    onClick={() => {
+                      setDeleteProductId(id);
+                      setProductDeleteModalOpen(true);
+                    }}
                     className="p-2 "
                   >
                     <FaRegTrashAlt className="text-lg text-red-600" />
@@ -108,6 +115,33 @@ const Cart = () => {
           Proceed to checkout
         </button>
       </div>
+      <ModalV2
+        isOpen={isProductDeleteModalOpen}
+        setIsOpen={setProductDeleteModalOpen}
+      >
+        <div className="flex flex-col justify-center items-center space-y-2">
+          <p className="text-xl font-bold">Are you sure?</p>
+          <p className="text-lg font-semibold">You want to delete it?</p>
+          <div className="flex items-center gap-x-4 pt-3">
+            <button
+              onClick={() => setProductDeleteModalOpen(false)}
+              className="bg-secondaryColor text-lg font-medium text-white py-1 px-3 rounded-md hover:bg-secondaryColor500"
+            >
+              Cancel
+            </button>
+
+            <button
+              className="bg-primaryColor text-lg font-medium text-white py-1 px-3 rounded-md hover:bg-primaryColor500"
+              onClick={() => {
+                dispatch(removeFromCart({ id: deleteProductId }));
+                setProductDeleteModalOpen(false);
+              }}
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </ModalV2>
     </div>
   );
 };

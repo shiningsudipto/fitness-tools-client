@@ -2,9 +2,10 @@ import { useGetSingleProductQuery } from "@/redux/features/product";
 import { useParams } from "react-router-dom";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { FaCartPlus } from "react-icons/fa";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { addToCart } from "@/redux/features/cart/cartSlice";
 import { TProduct } from "@/types";
+import { toast } from "react-toastify";
 
 const Details = () => {
   const params = useParams();
@@ -12,8 +13,14 @@ const Details = () => {
   const { data } = useGetSingleProductQuery(productId);
   const productDetails = data?.data;
   const dispatch = useAppDispatch();
+  const cart = useAppSelector((state) => state.cart);
+  const cartItem = cart.find((item) => item.id === productId);
+  const cartItemQuantity = cartItem?.quantity ?? 0;
+  console.log("quantity", cartItemQuantity);
+
   const handleAddToCart = (product: TProduct) => {
     // console.log(product);
+    toast.success("Product added into the cart");
     dispatch(
       addToCart({
         id: product?._id,
@@ -39,9 +46,13 @@ const Details = () => {
           <BsCurrencyDollar />
         </p>
         <button
+          disabled={
+            productDetails?.stock === 0 ||
+            productDetails?.stock <= cartItemQuantity
+          }
           onClick={() => handleAddToCart(productDetails)}
           title="add to cart"
-          className="flex items-center gap-2 font-medium hover:bg-secondaryColor bg-primaryColor text-white py-[8px] px-[24px] rounded"
+          className="flex items-center gap-2 font-medium hover:bg-secondaryColor bg-primaryColor text-white py-[8px] px-[24px] rounded disabled:bg-slate-500"
         >
           Add to <FaCartPlus className="" />
         </button>
