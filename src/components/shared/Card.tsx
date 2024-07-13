@@ -23,7 +23,7 @@ const Card: React.FC<CardProps> = ({ product, rowItem }) => {
           {product?.map((singleProduct) => {
             return (
               <div
-                className="group space-y-2 bg-slate-50 p-3 rounded-md"
+                className="group space-y-2 bg-slate-50 h-[440px] p-3 rounded-md"
                 key={singleProduct?._id}
               >
                 <div className="overflow-hidden">

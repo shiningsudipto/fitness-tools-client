@@ -23,8 +23,8 @@ const Modal: React.FC<ModalProps> = ({ label, title, children, btnStyle }) => {
           <DialogTitle className="text-center text-secondaryColor">
             {title}
           </DialogTitle>
-          {children}
         </DialogHeader>
+        {children}
       </DialogContent>
     </Dialog>
   );
