@@ -34,7 +34,7 @@ const paymentOptions = [
 
 const Checkout = () => {
   const navigate = useNavigate();
-  const [customerData, { data, error }] = useCreateCustomerMutation();
+  const [customerData] = useCreateCustomerMutation();
   // console.log("res-create-customer:", data, error);
 
   const cart = useAppSelector((state) => state.cart);

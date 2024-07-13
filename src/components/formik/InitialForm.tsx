@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Formik, Form, FormikProps } from "formik";
-import React, { ReactNode } from "react";
+import { Formik, Form } from "formik";
+import { ReactNode } from "react";
 
 interface InitialFormProps {
   initialValues: any;
@@ -15,9 +15,7 @@ const InitialForm = ({
 }: InitialFormProps) => {
   return (
     <Formik initialValues={initialValues} onSubmit={onSubmit}>
-      {({ values, setFieldValue }: FormikProps<any>) => (
-        <Form className="space-y-4">{children}</Form>
-      )}
+      {() => <Form className="space-y-4">{children}</Form>}
     </Formik>
   );
 };
