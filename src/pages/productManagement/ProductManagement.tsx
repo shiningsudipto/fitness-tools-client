@@ -12,6 +12,7 @@ import { categoryOptions } from "@/utils/options";
 import { Form, Formik } from "formik";
 import { FaRegTrashAlt, FaRegEdit } from "react-icons/fa";
 import EditProduct from "./components/EditProduct";
+import { DialogClose } from "@/components/ui/dialog";
 
 const initialValues: TProductFormValues = {
   name: "",
@@ -135,13 +136,37 @@ const ProductManagement = () => {
                 </td>
                 <td>{item?.category}</td>
                 <td className="border-l px-4 py-2 flex items-center gap-x-4 justify-center">
-                  <button
-                    onClick={() => handleProductDelete(id)}
-                    title="delete product"
-                    className="p-2 "
+                  <Modal
+                    label={
+                      <>
+                        <button title="delete product" className="p-2 ">
+                          <FaRegTrashAlt className="text-lg text-red-600" />
+                        </button>
+                      </>
+                    }
                   >
-                    <FaRegTrashAlt className="text-lg text-red-600" />
-                  </button>
+                    <div className="flex flex-col justify-center items-center space-y-2">
+                      <p className="text-xl font-bold">Are you sure?</p>
+                      <p className="text-lg font-semibold">
+                        You want to delete it?
+                      </p>
+                      <div className="flex items-center gap-x-4 pt-3">
+                        <DialogClose asChild>
+                          <button className="bg-secondaryColor text-lg font-medium text-white py-1 px-3 rounded-md hover:bg-secondaryColor500">
+                            Cancel
+                          </button>
+                        </DialogClose>
+                        <DialogClose asChild>
+                          <button
+                            className="bg-primaryColor text-lg font-medium text-white py-1 px-3 rounded-md hover:bg-primaryColor500"
+                            onClick={() => handleProductDelete(id)}
+                          >
+                            Delete
+                          </button>
+                        </DialogClose>
+                      </div>
+                    </div>
+                  </Modal>
                   <Modal
                     label={
                       <>

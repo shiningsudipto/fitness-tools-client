@@ -9,7 +9,7 @@ import {
 
 interface ModalProps {
   label: ReactNode;
-  title: string;
+  title?: string;
   children: ReactNode;
   btnStyle?: string;
 }
