@@ -48,14 +48,14 @@ const Products = () => {
   };
 
   if (isLoading) {
-    <Loader />;
+    return <Loader />;
   }
 
   return (
     <div className="section-gap flex lg:flex-row flex-col gap-x-10 gap-y-8">
       {/* Filter section */}
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        {({ values, setFieldValue, resetForm }) => (
+        {({ values, setFieldValue }) => (
           <Form className="space-y-4 lg:border-r lg:pr-10">
             <div>
               <input
@@ -94,7 +94,7 @@ const Products = () => {
               name="categories"
               type="checkbox"
             />
-            <div className="flex lg:flex-col flex-row gap-x-5">
+            <div className="flex lg:flex-col flex-row gap-x-5 gap-y-4">
               <button
                 type="submit"
                 className="bg-primaryColor font-medium text-white py-2 px-4 rounded"
@@ -104,8 +104,12 @@ const Products = () => {
               <button
                 type="button"
                 onClick={() => {
-                  resetForm();
+                  // resetForm();
                   setFilters(initialValues); // Reset the filters in the state as well
+                  setFieldValue("searchTerm", "");
+                  setFieldValue("sortByPrice", "asc");
+                  setFieldValue("price", 4000);
+                  setFieldValue("categories", "");
                 }}
                 className="bg-secondaryColor font-medium text-white py-2 px-4 rounded"
               >

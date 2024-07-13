@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 const Details = () => {
   const params = useParams();
   const productId = params?.id;
-  const { data } = useGetSingleProductQuery(productId);
+  const { data, isLoading } = useGetSingleProductQuery(productId);
   const productDetails = data?.data;
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state) => state.cart);
@@ -31,6 +31,11 @@ const Details = () => {
       })
     );
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="section-gap flex lg:flex-row flex-col justify-between gap-y-5">
       <div className="space-y-2">

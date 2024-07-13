@@ -79,7 +79,7 @@ const ProductManagement = () => {
   };
 
   if (isLoading) {
-    <Loader />;
+    return <Loader />;
   }
 
   return (
