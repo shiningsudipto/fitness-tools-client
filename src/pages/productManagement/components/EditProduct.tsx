@@ -5,6 +5,7 @@ import { useUpdateProductMutation } from "@/redux/features/product";
 import { TProduct, TProductFormValues } from "@/types";
 import { categoryOptions } from "@/utils/options";
 import { Form, Formik } from "formik";
+import { toast } from "react-toastify";
 
 interface EditProductProps {
   item: TProduct;
@@ -24,10 +25,14 @@ const EditProduct: React.FC<EditProductProps> = ({ item }) => {
   };
   const handleSubmit = async (values: TProductFormValues) => {
     // console.log(values);
+    const productEditState = toast.loading("Product updating");
     try {
       await productData({ productData: values, id: item._id });
+      toast.dismiss(productEditState);
+      toast.success("Product updated successfully");
     } catch (error) {
       console.log("error:", error);
+      toast.error("Failed to update product");
     }
   };
   return (
@@ -39,6 +44,7 @@ const EditProduct: React.FC<EditProductProps> = ({ item }) => {
             label="Product name"
             placeholder="your product name here"
             defaultValue={values?.name}
+            required
           />
           <Input
             name="price"
@@ -46,17 +52,20 @@ const EditProduct: React.FC<EditProductProps> = ({ item }) => {
             label="Price"
             placeholder="product price"
             defaultValue={values?.price}
+            required
           />
           <Textarea
             name="description"
             label="Description"
             placeholder="write your product description here"
+            required
           />
           <Input
             name="images"
             label="Image link"
             placeholder="your product image link here"
             defaultValue={values?.images}
+            required
           />
           <Dropdown
             setFieldValue={setFieldValue}
@@ -72,6 +81,7 @@ const EditProduct: React.FC<EditProductProps> = ({ item }) => {
             label="Stock"
             placeholder="product stock"
             defaultValue={values?.stock}
+            required
           />
           <button type="submit" className="primary-btn w-full">
             Submit

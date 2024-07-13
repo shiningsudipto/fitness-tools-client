@@ -13,6 +13,9 @@ import { Form, Formik } from "formik";
 import { FaRegTrashAlt, FaRegEdit } from "react-icons/fa";
 import EditProduct from "./components/EditProduct";
 import { DialogClose } from "@/components/ui/dialog";
+import ModalV2 from "@/components/shared/ModalV2";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const initialValues: TProductFormValues = {
   name: "",
@@ -29,30 +32,48 @@ const ProductManagement = () => {
   const [deleteProduct] = useDeleteProductMutation();
   //   console.log("delete-res", resDeleteData);
 
-  const [
-    productData,
-    { data: resCreateProductData, error: resCreateProductError },
-  ] = useCreateProductMutation();
-  console.log(
-    "res-create-product:",
-    resCreateProductData,
-    resCreateProductError
-  );
+  const [isCreateProductModalOpen, setCreateProductModalOpen] = useState(false);
+  const [isEditProductModalOpen, setEditProductModalOpen] = useState(false);
+  const [editableItem, setEditableItem] = useState<TProduct>({
+    _id: "",
+    name: "",
+    price: 0,
+    description: "",
+    images: "",
+    category: "",
+    stock: 0,
+    createdAt: "",
+    updatedAt: "",
+    __v: 0,
+  });
+  const [productData] = useCreateProductMutation();
+  // console.log(
+  //   "res-create-product:",
+  //   resCreateProductData,
+  //   resCreateProductError
+  // );
 
   const handleProductDelete = async (id: string) => {
     try {
       await deleteProduct({ id });
+      toast.success("Product deleted successfully");
     } catch (error) {
       console.log("error:", error);
+      toast.error("Failed to delete product");
     }
   };
 
   const handleSubmit = async (values: TProductFormValues) => {
     // console.log(values);
+    const productCreateState = toast.loading("Product creating");
     try {
       await productData(values);
+      setCreateProductModalOpen(false);
+      toast.dismiss(productCreateState);
+      toast.success("Product created successfully");
     } catch (error) {
       console.log("error:", error);
+      toast.error("Failed to create product");
     }
   };
 
@@ -60,55 +81,12 @@ const ProductManagement = () => {
     <div className="section-gap">
       <div className="flex items-center justify-between mb-5">
         <h2 className="text-2xl font-semibold">Manage products!</h2>
-        <Modal
-          label={"Create a product"}
-          title={"Create a product"}
-          btnStyle="primary-btn"
+        <button
+          className="primary-btn"
+          onClick={() => setCreateProductModalOpen(true)}
         >
-          <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-            {({ setFieldValue }) => (
-              <Form className="space-y-4">
-                <Input
-                  name="name"
-                  label="Product name"
-                  placeholder="your product name here"
-                />
-                <Input
-                  name="price"
-                  type="number"
-                  label="Price"
-                  placeholder="product price"
-                />
-                <Textarea
-                  name="description"
-                  label="Description"
-                  placeholder="write your product description here"
-                />
-                <Input
-                  name="images"
-                  label="Image link"
-                  placeholder="your product image link here"
-                />
-                <Dropdown
-                  setFieldValue={setFieldValue}
-                  name="category"
-                  label="Category"
-                  placeholder="select category"
-                  options={categoryOptions}
-                />
-                <Input
-                  name="stock"
-                  type="number"
-                  label="Stock"
-                  placeholder="product stock"
-                />
-                <button type="submit" className="primary-btn w-full">
-                  Submit
-                </button>
-              </Form>
-            )}
-          </Formik>
-        </Modal>
+          Create a produc
+        </button>
       </div>
       <table className="table-fixed w-full border-collapse border border-gray-200 mt-4">
         <thead>
@@ -167,22 +145,80 @@ const ProductManagement = () => {
                       </div>
                     </div>
                   </Modal>
-                  <Modal
-                    label={
-                      <>
-                        <FaRegEdit className="text-xl text-primaryColor" />
-                      </>
-                    }
-                    title={"Edit product"}
-                  >
-                    <EditProduct item={item} />
-                  </Modal>
+                  <FaRegEdit
+                    onClick={() => {
+                      setEditableItem(item);
+                      setEditProductModalOpen(true);
+                    }}
+                    className="text-xl text-primaryColor"
+                  />
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
+      <ModalV2
+        isOpen={isEditProductModalOpen}
+        setIsOpen={setEditProductModalOpen}
+      >
+        <EditProduct item={editableItem} />
+      </ModalV2>
+      <ModalV2
+        isOpen={isCreateProductModalOpen}
+        setIsOpen={setCreateProductModalOpen}
+        title={"Create a product"}
+        panelStyle="mt-[150px]"
+      >
+        <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+          {({ setFieldValue }) => (
+            <Form className="space-y-4">
+              <Input
+                name="name"
+                label="Product name"
+                placeholder="your product name here"
+                required
+              />
+              <Input
+                name="price"
+                type="number"
+                label="Price"
+                placeholder="product price"
+                required
+              />
+              <Textarea
+                name="description"
+                label="Description"
+                placeholder="write your product description here"
+                required
+              />
+              <Input
+                name="images"
+                label="Image link"
+                placeholder="your product image link here"
+                required
+              />
+              <Dropdown
+                setFieldValue={setFieldValue}
+                name="category"
+                label="Category"
+                placeholder="select category"
+                options={categoryOptions}
+              />
+              <Input
+                name="stock"
+                type="number"
+                label="Stock"
+                placeholder="product stock"
+                required
+              />
+              <button type="submit" className="primary-btn w-full">
+                Submit
+              </button>
+            </Form>
+          )}
+        </Formik>
+      </ModalV2>
     </div>
   );
 };
