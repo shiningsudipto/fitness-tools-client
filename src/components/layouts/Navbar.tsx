@@ -39,7 +39,7 @@ const Navbar = () => {
       <Link to={"/"} className="flex gap-x-2 items-center">
         <img src="FT.png" alt="" className="h-[42px]" />
         <p className="text-3xl font-bold">
-          <span className="text-secondaryColor">Fitness</span>{" "}
+          <span className="text-secondaryColor">Fitness Github</span>{" "}
           <span className="text-primaryColor">Tools</span>
         </p>
       </Link>
